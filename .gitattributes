@@ -1,0 +1,3 @@
+phpdoc/** linguist-documentation
+form_templates/** linguist-documentation
+src/internal/hybridAuth/** linguist-vendored

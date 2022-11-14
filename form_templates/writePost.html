@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Nou Article</title>
+</head>
+
+<body>
+    <div class="bg-dark d-flex align-items-center justify-content-center" style="height:100vh; width:100vw;">
+        <div class="bg-white rounded col-10 col-md-8 col-lg-8 col-xxl-8">
+            <form class="h-50 align-middle m-4" action="login.php" method="POST">
+                <h1>Nou article</h1>
+                <div class="form-group">
+                    <label for="article">Article</label>
+                    <textarea class="form-control" name="article" id="article" rows="10"></textarea>
+                </div>
+                <div class="col-5 col-md-4 col-lg-3 col-xxl-2">
+
+                    <label for="article-date">Date</label>
+                    <input class="form-control" name="article-date" id="article-date" type="date">
+                </div>
+                <div class="mt-4">
+                    <div class="d-flex">
+                        <p class="bg-danger py-2 px-3 border rounded text-white">ERROR: El Correu Electronic no coincideix amb la verificacio.</p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
