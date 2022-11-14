@@ -29,6 +29,7 @@ function route(string $url, array $mux): void
 $mux["/"] = "src/controllers/index.php";
 $mux["/index"] = "src/controllers/index.php";
 $mux["/gallery"] = "src/controllers/gallery.php";
+$mux["/add-image"] = "src/controllers/add-image.php";
 $mux["/login"] = "src/controllers/login.php";
 $mux["/register"] = "src/controllers/register.php";
 $mux["/logout"] = "src/controllers/logout.php";
