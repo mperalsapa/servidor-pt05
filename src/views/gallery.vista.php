@@ -14,6 +14,19 @@
     include_once("src/internal/viewFunctions/navbar.php");
     ?>
     <div class="contenidor container bg-white rounded p-4">
+        <?php
+
+        if (checkLogin()) {
+            if (checkLogin()) {
+                // TODO: display image count
+                // include_once("src/internal/db/mysql.php");
+                // $pdo = getMysqlPDO();
+                // $badgeCount = getArticleCountByUser($pdo, $_SESSION["id"]);
+                echo "<a class=\"m-3 btn btn-primary rounded text-white\" href=\"add-image\"><i class=\"bi bi-plus-square\"></i> Afegir Imatge <span class=\"badge bg-secondary\">10</span></a>";
+            }
+        }
+
+        ?>
         <div class="d-flex flex-wrap">
             <?php
 
