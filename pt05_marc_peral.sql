@@ -18,10 +18,10 @@ SET time_zone = "+01:00";
 /*!40101 SET NAMES utf8mb4 */
 ;
 --
--- Base de datos: `pt04_marc_peral`
+-- Base de datos: `pt05_marc_peral`
 --
-CREATE DATABASE IF NOT EXISTS `pt04_marc_peral` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `pt04_marc_peral`;
+CREATE DATABASE IF NOT EXISTS `pt05_marc_peral` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `pt05_marc_peral`;
 -- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `article`
