@@ -4,8 +4,12 @@
         <a class="navbar-brand" href="index">Articles de Pel·licules</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- TODO: dynamic "active" link based on actual page -->
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index">Inici</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="gallery">Galeria</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

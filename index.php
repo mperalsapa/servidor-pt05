@@ -28,6 +28,7 @@ function route(string $url, array $mux): void
 // declarem les rutes del lloc
 $mux["/"] = "src/controllers/index.php";
 $mux["/index"] = "src/controllers/index.php";
+$mux["/gallery"] = "src/controllers/gallery.php";
 $mux["/login"] = "src/controllers/login.php";
 $mux["/register"] = "src/controllers/register.php";
 $mux["/logout"] = "src/controllers/logout.php";
