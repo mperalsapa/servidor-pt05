@@ -26,9 +26,20 @@
                     include_once("src/internal/db/session_manager.php");
                     if (checkLogin()) {
                         include_once("src/internal/db/mysql.php");
+                        include_once("src/internal/viewFunctions/browser.php");
+
                         $pdo = getMysqlPDO();
-                        $badgeCount = getArticleCountByUser($pdo, $_SESSION["id"]);
-                        echo "<a class=\"ms-3 nav-link bg-primary rounded text-white\" href=\"write-article\"><i class=\"bi bi-plus-square\"></i> Nou Article <span class=\"badge bg-secondary\">$badgeCount</span></a>";
+                        $pagePath = getPathOverBase(false);
+                        if ($pagePath == "gallery" || $pagePath == "add-image") {
+                            $badgeText = "Afegir Image";
+                            $badgeUrl = "add-image";
+                            $badgeCount = getImageCountByUserID($pdo, $_SESSION["id"]);
+                        } else {
+                            $badgeText = "Nou Article";
+                            $badgeUrl = "write-article";
+                            $badgeCount = getArticleCountByUser($pdo, $_SESSION["id"]);
+                        }
+                        echo "<a class=\"ms-3 nav-link bg-primary rounded text-white\" href=\"$badgeUrl\"><i class=\"bi bi-plus-square\"></i> $badgeText <span class=\"badge bg-secondary\">$badgeCount</span></a>";
                     }
                     ?>
                 </li>
