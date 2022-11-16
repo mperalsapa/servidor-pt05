@@ -2,6 +2,8 @@
 // Marc Peral
 // script que s'encarrega de mostrar la paginacio a l'hora de mostrar els articles
 
+include_once("src/internal/viewFunctions/browser.php");
+
 // aquesta funcio, agafa de la base de dades el numero d'articles que hi ha a la base de dades
 // fa un calcul en base a un parametre, i retorna el numero maxim de pagines segons el numero d'articles
 // que volem per pagina
@@ -168,12 +170,12 @@ function printPagination(int $page, int $minPage, int $maxPage, int $maxPaginati
 // ja que un usuari amb sessio iniciada, pot decidir si veure els seus articles o el de tots
 function getPaginationVisibility(): string
 {
-    if (!isset($_GET["art"])) {
+    if (!isset($_GET["view"])) {
         return "";
     }
-    if ($_GET["art"] == "all") {
-        return "&art=all";
+    if ($_GET["view"] == "all") {
+        return "&view=all";
     } else {
-        return "&art=me";
+        return "&view=mine";
     }
 }

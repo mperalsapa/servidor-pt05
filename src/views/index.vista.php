@@ -23,8 +23,8 @@
 		$allActive = "";
 
 		if (empty($displayArticleSelection)) {
-			if (isset($_GET["art"])) {
-				if ($_GET["art"] == "all") {
+			if (isset($_GET["view"])) {
+				if ($_GET["view"] == "all") {
 					$allActive = "active";
 				} else {
 					$meActive = "active";
@@ -34,8 +34,8 @@
 			}
 
 			echo "<div class=\"btn-group mx-4 $displayArticleSelection\" role=\"group\" aria-label=\"Basic example\">";
-			echo "<a class=\"btn btn-primary $allActive\" href=\"index?p=$page&art=all\">Tots</a>";
-			echo "<a class=\"btn btn-primary $meActive\" href=\"index?p=$page&art=me\">Meus</a>";
+			echo "<a class=\"btn btn-primary $allActive\" href=\"index?p=$page&view=all\">Tots</a>";
+			echo "<a class=\"btn btn-primary $meActive\" href=\"index?p=$page&view=mine\">Meus</a>";
 			echo "</div>";
 		}
 

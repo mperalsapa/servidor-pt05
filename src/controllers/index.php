@@ -13,18 +13,18 @@ $pdo = getMysqlPDO();
 
 // configurem el numero d'items per pagina, es a dir, quantitat d'articles per pagina
 $itemsPerPage = 5;
-// si la url no conté "art" configurem $meArticles a true.
+// si la url no conté "view" configurem $mineArticles a true.
 // aquest atribut fa que es mostrin els articles de l'usuari que conte sessio iniciada
 // o que es mostrin tots els articles
-if (isset($_GET["art"])) {
-  $meArticles = $_GET["art"] == "me" ? true : false;
+if (isset($_GET["view"])) {
+  $mineArticles = $_GET["view"] == "mine" ? true : false;
 } else {
-  $meArticles = true;
+  $mineArticles = true;
 }
 
 // comprovem si l'usuari ha iniciat sessio i vol mostrar els seus articles
 // en cas de que no tingui sessio iniciada, no es podran mostrar aquests articles
-if (checkLogin() && $meArticles) {
+if (checkLogin() && $mineArticles) {
   // si l'usuari ha iniciat sessio agafem el seu id i el fem servir per agafar el numero d'articles que te
   $userid = $_SESSION["id"];
   $artCount = getArticleCountByUser($pdo, $userid);
