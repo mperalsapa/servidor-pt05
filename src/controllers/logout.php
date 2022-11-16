@@ -9,5 +9,8 @@ include_once("src/internal/viewFunctions/browser.php");
 // si l'usuari te una sessio iniciada, la destruim i redireccionem a l'arrel
 if (checkLogin()) {
     session_destroy();
+    if (isset($_GET["redirect"])) {
+        redirectClient($_GET["redirect"]);
+    }
     redirectClient("/");
 }

@@ -55,9 +55,10 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <?php
                     include_once("src/internal/db/session_manager.php");
+                    include_once("src/internal/viewFunctions/browser.php");
                     if (checkLogin()) {
                         echo "<li><a class=\"dropdown-item\" href=\"profile\"><i class=\"bi bi-person-fill\"></i> Perfil</a></li>";
-                        echo "<li><a class=\"dropdown-item\" href=\"logout\"><i class=\"bi bi-box-arrow-right\"></i> Tancar sesió</a></li>";
+                        echo "<li><a class=\"dropdown-item\" href=\"logout?redirect=" . getPathOverBase(false) .  "\"><i class=\"bi bi-box-arrow-right\"></i> Tancar sesió</a></li>";
                     } else {
                         echo "<li><a class=\"dropdown-item\" href=\"login\"><i class=\"bi bi-box-arrow-in-right\"></i> Iniciar Sessió</a></li>";
                         echo "<li><a class=\"dropdown-item\" href=\"register\"><i class=\"bi bi-clipboard-minus\"></i> Registrarse</a></li>";
