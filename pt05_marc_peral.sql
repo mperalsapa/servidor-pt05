@@ -3,12 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2022 a las 18:34:08
+-- Tiempo de generación: 16-11-2022 a las 21:39:21
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+01:00";
+SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */
 ;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */
@@ -26,12 +26,11 @@ USE `pt05_marc_peral`;
 --
 -- Estructura de tabla para la tabla `article`
 --
-DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `article` varchar(1000) NOT NULL,
   `autor` int(11) NOT NULL,
-  `data` date NOT NULL DEFAULT current_timestamp()
+  `data` date DEFAULT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 --
 -- Volcado de datos para la tabla `article`
@@ -118,9 +117,42 @@ VALUES (397, 'Autor 20 - Article 01', 20, '2022-10-01'),
   (475, 'Autor 20 - Article 79', 20, '2022-12-18');
 -- --------------------------------------------------------
 --
+-- Estructura de tabla para la tabla `imatge`
+--
+CREATE TABLE `imatge` (
+  `id` int(11) NOT NULL,
+  `autor` int(11) NOT NULL,
+  `titol` varchar(128) NOT NULL,
+  `fitxer` varchar(256) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+--
+-- Volcado de datos para la tabla `imatge`
+--
+INSERT INTO `imatge` (`id`, `autor`, `titol`, `fitxer`)
+VALUES (1, 19, '', 'Horari DAW1.jpg'),
+  (
+    2,
+    20,
+    '',
+    'forest-sunbeams-trees-sunlight-70365.jpeg'
+  ),
+  (3, 20, '', 'pexels-photo-38136.jpeg'),
+  (4, 20, '', 'pexels-photo-113338.jpeg'),
+  (5, 20, '', 'pexels-photo-131723.jpeg'),
+  (6, 20, '', 'pexels-photo-132428.jpeg'),
+  (7, 20, '', 'pexels-photo-142497.jpeg'),
+  (8, 20, '', 'pexels-photo-167698.jpeg'),
+  (9, 20, '', 'pexels-photo-418831.jpeg'),
+  (10, 20, '', 'pexels-photo-775201.jpeg'),
+  (11, 20, '', 'pexels-photo-1112186.jpeg'),
+  (12, 20, '', 'pexels-photo-1179229.jpeg'),
+  (13, 20, '', 'pexels-photo-1423600.jpeg'),
+  (14, 20, '', 'pexels-photo-1563604.jpeg'),
+  (15, 19, '', 'T_METACITY_V3_compress.png');
+-- --------------------------------------------------------
+--
 -- Estructura de tabla para la tabla `usuari`
 --
-DROP TABLE IF EXISTS `usuari`;
 CREATE TABLE `usuari` (
   `id` int(11) NOT NULL,
   `nom` varchar(20) NOT NULL,
@@ -152,7 +184,7 @@ VALUES (
     '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',
     NULL,
     NULL,
-    '2022-11-10 17:41:57'
+    '2022-11-10 16:41:57'
   ),
   (
     20,
@@ -162,7 +194,7 @@ VALUES (
     '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',
     NULL,
     NULL,
-    '2022-11-03 18:01:38'
+    '2022-11-03 17:01:38'
   );
 --
 -- Índices para tablas volcadas
@@ -173,6 +205,12 @@ VALUES (
 ALTER TABLE `article`
 ADD PRIMARY KEY (`id`),
   ADD KEY `autor` (`autor`);
+--
+-- Indices de la tabla `imatge`
+--
+ALTER TABLE `imatge`
+ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_autor_usuari_id` (`autor`);
 --
 -- Indices de la tabla `usuari`
 --
@@ -186,7 +224,13 @@ ADD PRIMARY KEY (`id`);
 --
 ALTER TABLE `article`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 111;
+  AUTO_INCREMENT = 476;
+--
+-- AUTO_INCREMENT de la tabla `imatge`
+--
+ALTER TABLE `imatge`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 16;
 --
 -- AUTO_INCREMENT de la tabla `usuari`
 --
@@ -201,6 +245,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
 --
 ALTER TABLE `article`
 ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`autor`) REFERENCES `usuari` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+--
+-- Filtros para la tabla `imatge`
+--
+ALTER TABLE `imatge`
+ADD CONSTRAINT `fk_autor_usuari_id` FOREIGN KEY (`autor`) REFERENCES `usuari` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
 ;
