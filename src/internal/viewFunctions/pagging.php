@@ -28,6 +28,8 @@ function checkMaxPage(PDO $conn, int $itemsPerPage): int
 // finalment si la apgina es major que el numero maxim de pagines, redirigim al la pagina maxima
 function getPagNumber(int $maxPage): int
 {
+    include_once("src/internal/viewFunctions/browser.php");
+    $path = getPathOverBase(false);
     if (empty($_GET["p"])) {
         return 1;
     }
@@ -35,13 +37,13 @@ function getPagNumber(int $maxPage): int
     $pag = intval($_GET["p"]);
 
     if ($pag != $_GET["p"]) {
-        redirectClient("?p=$pag");
+        redirectClient("$path?p=$pag");
     }
     if ($pag < 1) {
         redirectClient("?p=1");
     }
     if ($pag > $maxPage) {
-        redirectClient("?p=$maxPage");
+        redirectClient("$path?p=$maxPage");
     }
 
     return $pag;
