@@ -1,12 +1,39 @@
 <?php
 // Marc Peral
 // script que s'encarrega de mostrar la galeria d'imatges
-require_once("src/internal/viewFunctions/pagging.php");
-require_once("src/internal/db/session_manager.php");
+include_once("src/internal/viewFunctions/pagging.php");
+include_once("src/internal/db/session_manager.php");
+include_once("src/internal/db/mysql.php");
+include_once("src/internal/viewFunctions/gallery.php");
 
+
+if (isset($_GET["view"])) {
+    $meImg = $_GET["view"] == "mine" ? true : false;
+} else {
+    $meImg = true;
+}
 
 // configurem el numero d'items per pagina, es a dir, quantitat d'imatges per pagina
-$itemsPerPage = 20;
+$itemsPerPage = 5;
+
+// agafem de la base de dades el numero d'imatges que hi ha, depenent de si l'usuari ha iniciat sesio o no
+$pdo = getMysqlPDO();
+if (checkLogin() && $meImg) {
+    $imageCount = getImageCountByUserID($pdo, getUserIDSession());
+    $maxPage = ceil($imageCount / $itemsPerPage);
+    $page = getPagNumber($maxPage);
+    $images = getImagePageByUserID($pdo, $page, $itemsPerPage, getUserIDSession());
+} else {
+    $imageCount = getImageCount($pdo);
+    $maxPage = ceil($imageCount / $itemsPerPage);
+    $page = getPagNumber($maxPage);
+    $images = getImagePage($pdo, $page, $itemsPerPage);
+}
+
+
+// $parsed = parse_url($_SERVER["REQUEST_URI"]);
+
+// print("<pre>" . print_r($parsed, true) . "</pre>");
 
 
 

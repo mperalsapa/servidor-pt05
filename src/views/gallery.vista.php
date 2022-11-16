@@ -15,32 +15,41 @@
     ?>
     <div class="contenidor container bg-white rounded p-4">
         <?php
+        $displayImgSelection = checkLogin() ? "" : "d-none";
+        $meActive = "";
+        $allActive = "";
 
-        if (checkLogin()) {
-            if (checkLogin()) {
-                // TODO: display image count
-                // include_once("src/internal/db/mysql.php");
-                // $pdo = getMysqlPDO();
-                // $badgeCount = getArticleCountByUser($pdo, $_SESSION["id"]);
-                echo "<a class=\"m-3 btn btn-primary rounded text-white\" href=\"add-image\"><i class=\"bi bi-plus-square\"></i> Afegir Imatge <span class=\"badge bg-secondary\">10</span></a>";
+        if (empty($displayImgSelection)) {
+            if (isset($_GET["view"])) {
+                if ($_GET["view"] == "all") {
+                    $allActive = "active";
+                } else {
+                    $meActive = "active";
+                }
+            } else {
+                $meActive = "active";
             }
+
+            echo "<div class=\"btn-group m-1 $displayImgSelection\" role=\"group\" aria-label=\"Basic example\">";
+            echo "<a class=\"btn btn-primary $allActive\" href=\"gallery?p=$page&view=all\">Totes</a>";
+            echo "<a class=\"btn btn-primary $meActive\" href=\"gallery?p=$page&view=mine\">Meves</a>";
+            echo "</div>";
         }
 
         ?>
         <div class="d-flex flex-wrap">
             <?php
-
-            for ($i = 0; $i < 15; $i++) {
-                echo "<div class=\"m-5\">
-                <img class=\"img-thumbnail\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUw-ExG4g1VwP-6ez0s4fZFjUPXN7MCWpsFrVuRcYidg&s\" alt=\"wikipedia logo\">
-                </div>";
+            if ($images != null) {
+                printImages($images);
+            } else {
+                echo "No hi ha imatges a mostrar... ¬¬";
             }
             ?>
 
         </div>
 
         <?php
-        printPagination(3, 1, 9, 6)
+        printPagination($page, 1, $maxPage, 6)
         ?>
     </div>
 

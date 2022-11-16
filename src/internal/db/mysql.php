@@ -300,3 +300,78 @@ function removeUserAccount(PDO $conn, int $userId): void
     $pdo->bindParam(":id", $userId);
     $pdo->execute();
 }
+
+// aquesta funcio afegeix a la base de dades la informacio d'una imatge que s'ha pujat al servidor
+// retorna true si l'insert s'ha produit correctament
+// retorna false si l'insert no s'ha pogut executar
+function addImage(PDO $conn, int $userId, string $title, string $fileName): bool
+{
+    $pdo = $conn->prepare("INSERT INTO imatge (autor, titol, fitxer) VALUES (:id, :titol, :fitxer)");
+    $pdo->bindParam(":id", $userId);
+    $pdo->bindParam(":titol", $title);
+    $pdo->bindParam(":fitxer", $fileName);
+    $pdo->execute();
+
+    if ($pdo->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function getImageCount(PDO $conn): int
+{
+    $pdo = $conn->prepare("SELECT count(*) as 'Count' FROM imatge");
+    $pdo->execute();
+    $row = $pdo->fetch();
+
+    return $row["Count"];
+}
+
+function getImageCountByUserID(PDO $conn, int $userId): int
+{
+    $pdo = $conn->prepare("SELECT count(*) as 'Count' FROM imatge WHERE autor = :id");
+    $pdo->bindParam(":id", $userId);
+    $pdo->execute();
+    $row = $pdo->fetch();
+
+    return $row["Count"];
+}
+
+function getImagePage(PDO $conn, int $page, int $maxImgPerPage): ?PDOStatement
+{
+
+    $min = ($page * $maxImgPerPage) - $maxImgPerPage;
+    $max = $maxImgPerPage;
+
+    $pdo = $conn->prepare("SELECT * FROM imatge LIMIT :minLimit, :maxLimit");
+    $pdo->bindParam(":minLimit", $min, PDO::PARAM_INT);
+    $pdo->bindParam(":maxLimit", $max, PDO::PARAM_INT);
+    $pdo->execute();
+
+    if ($pdo->rowCount() > 0) {
+        return $pdo;
+    } else {
+        return null;
+    }
+}
+
+function getImagePageByUserID(PDO $conn, int $page, int $maxImgPerPage, int $userId): ?PDOStatement
+{
+
+    $min = ($page * $maxImgPerPage) - $maxImgPerPage;
+    $max = $maxImgPerPage;
+
+    $pdo = $conn->prepare("SELECT * FROM imatge WHERE autor = :id LIMIT :minLimit, :maxLimit");
+    $pdo->bindParam(":id", $userId);
+    $pdo->bindParam(":minLimit", $min, PDO::PARAM_INT);
+    $pdo->bindParam(":maxLimit", $max, PDO::PARAM_INT);
+    $pdo->execute();
+
+    if ($pdo->rowCount() > 0) {
+        return $pdo;
+    } else {
+        return null;
+    }
+}
