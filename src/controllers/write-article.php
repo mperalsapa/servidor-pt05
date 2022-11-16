@@ -48,6 +48,10 @@ function getArticleData(int $articleId = NULL): array
     return $result;
 }
 
+if (!checkLogin()) {
+    redirectClient("/");
+}
+
 // comprovem si la sol·licitut es GET
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
