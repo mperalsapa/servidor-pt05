@@ -19,6 +19,6 @@ function printGitInfo(string $commit): void
     $version = mb_substr($commit, 0, 5);
 
     echo "<footer class=\"fixed-bottom\">";
-    echo "<span class=\"text-muted py-1 px-1\"><a class=\"text-decoration-none \" href= \"https://github.com/mperalsapa/servidor-pt04/\">v-$version</a></span>";
+    echo "<span class=\"text-muted py-1 px-1\"><a class=\"text-decoration-none \" href= \"https://github.com/mperalsapa/servidor-pt05/\">v-$version</a></span>";
     echo "</footer>";
 }
