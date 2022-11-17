@@ -5,10 +5,15 @@
 function printImages(PDOStatement $images): void
 {
     require("env.php");
+    global $userId;
 
     while ($row = $images->fetch()) {
         $url = $baseDomain . $baseUrl . $uploadsFolder . $row["fitxer"];
-        if (isset($userid) && $row["autor"] == $userId) {
+        if (checkLogin()) {
+            $userId = getUserIDSession();
+        }
+
+        if (isset($userId) && $row["autor"] == $userId) {
             $display = "";
         } else {
             $display = "d-none";
