@@ -13,34 +13,35 @@ include_once("src/internal/viewFunctions/browser.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include("env.php");
-    $fileName = $_FILES["imageFile"]["name"];
-    $targetFile = $uploadsFolder . $fileName;
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    if (empty($_POST["imageTitle"])) {
+        returnAlert("No has introduit un titol.", "danger", "src/views/add-image.vista.php", null);
+    }
+    $imageTitle = $_POST["imageTitle"];
 
     // comprovem si el post rebut es des d'un formulari amb un submit
-    if (isset($_POST["submit"])) {
+    if (isset($_POST["submit"]) && $_FILES["imageFile"]["size"] != 0 && $_FILES["imageFile"]["error"] == 0) {
         $check = getimagesize($_FILES["imageFile"]["tmp_name"]);
         if ($check == false) {
             returnAlert("El fixter que s'ha introduit no es una imatge.", "danger", "src/views/add-image.vista.php", null);
         }
     } else {
-        returnAlert("El fixter que s'ha introduit no es una imatge.", "danger", "src/views/add-image.vista.php", null);
+        returnAlert("S'ha produit un error carregant la imatge. Torna a provar. Si el problema persisteix contacta amb un administrador.", "danger", "src/views/add-image.vista.php", null);
     }
-
+    $fileName = $_FILES["imageFile"]["name"];
+    $targetFile = $uploadsFolder . $fileName;
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
     // comprovem si el fitxer que volem guardar ja existeix (o un fitxer amb el mateix nom)
     if (file_exists($targetFile)) {
         returnAlert("El nom del fixer ja existeix. Canvia el nom i torna a provar.", "danger", "src/views/add-image.vista.php", null);
     }
 
-
     // comprovem si el fitxer es menor del tamany maxim
     if ($_FILES["imageFile"]["size"] > 500000) {
         returnAlert("El fitxer es massa gran.", "danger", "src/views/add-image.vista.php", null);
     }
-
-
 
     // comprovem si el fixer te una extensio d'imatge (jpg, png, jpeg o gif)
     if (
@@ -49,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ) {
         returnAlert("El fitxer no es una imatge. Els fitxers admesos son: jpg, jpeg, png i gif..", "danger", "src/views/add-image.vista.php", null);
     }
-
 
     // guardem les dades de la imatge a la base de dades. En cas d'error retornem a l'usuari l'error i no guardem.
     $pdo = getMysqlPDO();
