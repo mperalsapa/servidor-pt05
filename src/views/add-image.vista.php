@@ -34,13 +34,13 @@
                             <input class="form-control" id="imageFile" name="imageFile" type="file" accept="image/png, image/jpeg" onchange="setImagePreview(this)">
                         </label>
                     </div>
-                    <div class="col-6 my-5 w-100 position-relative border d-flex" style="min-height: 200px;">
-                        <img id="previewImage" class="w-100">
+                    <div class="col-6 mb-3 w-100 position-relative border" style="min-height: 200px;">
+                        <img id="previewImage" class="w-100 rounded">
                         <span class="position-absolute translate-middle top-50 start-50">Previsualitzacio</span>
                     </div>
                     <?php
                     if (!empty($alertMessage)) {
-                        echo "<div class=\"mt-3 mb-0 d-flex justify-content align-items-center alert alert-$alertType alert-dismissible\" role=\"alert\"><span class=\"me-3\">$alertIcon</span> $alertMessage <button type=\"button\" class=\"btn-close\" aria-label=\"Close\" data-bs-dismiss=\"alert\" ></button></div>";
+                        echo "<div class=\"mb-3 mb-0 d-flex justify-content align-items-center alert alert-$alertType alert-dismissible\" role=\"alert\"><span class=\"me-3\">$alertIcon</span> $alertMessage <button type=\"button\" class=\"btn-close\" aria-label=\"Close\" data-bs-dismiss=\"alert\" ></button></div>";
                     }
                     ?>
                     <button type="submit" name="submit" class="btn btn-primary mt-auto">Guardar Imatge</button>
