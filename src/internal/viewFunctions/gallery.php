@@ -27,15 +27,15 @@ function printImages(PDOStatement $images): void
                                 <p class=\"card-text\">Marc Peral</p>
                             </div>
                             <!-- Button trigger modal -->
-                            <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\">
+                            <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">
                                 <i class=\"bi bi-trash\"></i>
                             </button>
                             <!-- Modal -->
-                            <div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">
+                            <div class=\"modal fade\" id=\"imageModal$imageId\" tabindex=\"-1\" aria-labelledby=\"imageModalLabel$imageId\" aria-hidden=\"true\">
                                 <div class=\"modal-dialog\">
                                     <div class=\"modal-content\">
                                         <div class=\"modal-header\">
-                                            <h5 class=\"modal-title\" id=\"exampleModalLabel\">Esborrar imatge</h5>
+                                            <h5 class=\"modal-title\" id=\"imageModalLabel$imageId\">Esborrar imatge</h5>
                                             <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                                         </div>
                                         <div class=\"modal-body\">
@@ -43,7 +43,7 @@ function printImages(PDOStatement $images): void
                                         </div>
                                         <div class=\"modal-footer\">
                                             <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-                                            <a class=\"btn btn-danger\" href=\"delete-image\">Esborrar</a>
+                                            <a class=\"btn btn-danger\" href=\"delete-image?id=$imageId\">Esborrar</a>
                                         </div>
                                     </div>
                                 </div>
