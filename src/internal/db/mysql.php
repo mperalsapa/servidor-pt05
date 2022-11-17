@@ -375,3 +375,28 @@ function getImagePageByUserID(PDO $conn, int $page, int $maxImgPerPage, int $use
         return null;
     }
 }
+
+function getImageAuthor(PDO $conn, int $imageId): ?int
+{
+    $pdo = $conn->prepare("SELECT autor FROM imatge WHERE imatge.id = :idImatge");
+    $pdo->bindParam(":idImatge", $imageId);
+    $pdo->execute();
+    if ($pdo->rowCount() > 0) {
+        $row = $pdo->fetch();
+        return $row["autor"];
+    }
+
+    return null;
+}
+
+function deleteImage(PDO $conn, int $imageId): bool
+{
+    $pdo = $conn->prepare("DELETE FROM imatge WHERE imatge.id = :idImatge");
+    $pdo->bindParam(":idImatge", $imageId);
+    $pdo->execute();
+    if ($pdo->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
