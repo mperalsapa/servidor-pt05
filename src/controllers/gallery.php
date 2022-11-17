@@ -19,6 +19,7 @@ $itemsPerPage = 5;
 // agafem de la base de dades el numero d'imatges que hi ha, depenent de si l'usuari ha iniciat sesio o no
 $pdo = getMysqlPDO();
 if (checkLogin() && $meImg) {
+    $userId = getUserIDSession();
     $imageCount = getImageCountByUserID($pdo, getUserIDSession());
     $maxPage = ceil($imageCount / $itemsPerPage);
     $page = getPagNumber($maxPage);

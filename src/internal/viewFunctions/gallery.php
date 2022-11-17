@@ -8,8 +8,7 @@ function printImages(PDOStatement $images): void
 
     while ($row = $images->fetch()) {
         $url = $baseDomain . $baseUrl . $uploadsFolder . $row["fitxer"];
-        $userId = getUserIDSession();
-        if ($row["autor"] == $userId) {
+        if (isset($userid) && $row["autor"] == $userId) {
             $display = "";
         } else {
             $display = "d-none";
