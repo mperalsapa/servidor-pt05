@@ -27,23 +27,32 @@ function route(string $url, array $mux): void
 
 // declarem les rutes del lloc
 $mux["/"] = "src/controllers/index.php";
+
+// rutes que tenen a veure amb index
 $mux["/index"] = "src/controllers/index.php";
-$mux["/gallery"] = "src/controllers/gallery.php";
-$mux["/add-image"] = "src/controllers/add-image.php";
-$mux["/login"] = "src/controllers/login.php";
-$mux["/register"] = "src/controllers/register.php";
-$mux["/logout"] = "src/controllers/logout.php";
-$mux["/lost-password"] = "src/controllers/lost-password.php";
-$mux["/login-callback"] = "src/controllers/login-callback.php";
-$mux["/profile"] = "src/controllers/profile.php";
-$mux["/change-email"] = "src/controllers/change-profile.php";
-$mux["/change-password"] = "src/controllers/change-profile.php";
-$mux["/delete-account"] = "src/controllers/delete-profile.php";
 $mux["/write-article"] = "src/controllers/write-article.php";
 $mux["/delete-article"] = "src/controllers/delete-article.php";
 $mux["/tos"] = "src/controllers/tos.php";
 $mux["/privacy"] = "src/controllers/privacy.php";
 $mux["/contact"] = "src/controllers/contact.php";
+
+// rutes que tenen a veure amb galeria
+$mux["/gallery"] = "src/controllers/gallery.php";
+$mux["/add-image"] = "src/controllers/add-image.php";
+$mux["/delete-image"] = "src/controllers/delete-image.php";
+
+// rutes que tenen a veure amb l'usuari
+$mux["/change-email"] = "src/controllers/change-profile.php";
+$mux["/change-password"] = "src/controllers/change-profile.php";
+$mux["/delete-account"] = "src/controllers/delete-profile.php";
+$mux["/lost-password"] = "src/controllers/lost-password.php";
+$mux["/profile"] = "src/controllers/profile.php";
+
+// rutes que tenen a veure amb la sessio
+$mux["/login"] = "src/controllers/login.php";
+$mux["/register"] = "src/controllers/register.php";
+$mux["/logout"] = "src/controllers/logout.php";
+$mux["/login-callback"] = "src/controllers/login-callback.php";
 $mux["/google-login"] = "src/controllers/login-callback.php";
 $mux["/github-login"] = "src/controllers/login-callback.php";
 $mux["/twitter-login"] = "src/controllers/login-callback.php";
