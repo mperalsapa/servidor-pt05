@@ -400,3 +400,16 @@ function deleteImage(PDO $conn, int $imageId): bool
         return false;
     }
 }
+
+function getImageName(PDO $conn, int $imageId): ?string
+{
+    $pdo = $conn->prepare("SELECT fitxer FROM imatge WHERE imatge.id = :idImatge");
+    $pdo->bindParam(":idImatge", $imageId);
+    $pdo->execute();
+    if ($pdo->rowCount() > 0) {
+        $row = $pdo->fetch();
+        return $row["fitxer"];
+    } else {
+        return null;
+    }
+}

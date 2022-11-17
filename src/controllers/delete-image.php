@@ -6,6 +6,7 @@
 include_once("src/internal/db/mysql.php");
 include_once("src/internal/db/session_manager.php");
 include_once("src/internal/viewFunctions/browser.php");
+include("env.php");
 
 // comprovem si el metode es GET
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -31,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     // iniciem la connexio amb la base de dades i agafem l'autor de la imatge que volem esborrar
     $pdo = getMysqlPDO();
     $imageAuthor = getImageAuthor($pdo, $imageId);
+    $imageName = getImageName($pdo, $imageId);
 
     // si l'id del actual usuari i l'autor de l'imatge demanada no coincideixen, redireccionem a l'arrel
     if ($userId != $imageAuthor) {
@@ -39,6 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     // si tot es correcte, esborrem la imatge i redireccionem a l'arrel
     if (deleteImage($pdo, $imageId)) {
+        $filePath = $uploadsFolder . $imageName;
+        unlink($filePath);
+
         redirectClient("gallery");
     } else {
         echo "S'ha produit un error esborrant la teva imatge. Torna a provar mes tard i si el problema persisteix, contacta amb un administrador";
