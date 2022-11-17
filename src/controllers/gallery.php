@@ -14,7 +14,7 @@ if (isset($_GET["view"])) {
 }
 
 // configurem el numero d'items per pagina, es a dir, quantitat d'imatges per pagina
-$itemsPerPage = 5;
+$itemsPerPage = 15;
 
 // agafem de la base de dades el numero d'imatges que hi ha, depenent de si l'usuari ha iniciat sesio o no
 $pdo = getMysqlPDO();

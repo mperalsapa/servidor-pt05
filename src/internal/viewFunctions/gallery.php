@@ -20,8 +20,8 @@ function printImages(PDOStatement $images): void
         $imageId = $row["id"];
         $imageTitle = $row["titol"];
         $userName = $row["nom"] . " " . $row["cognoms"];
-        echo "  <div style=\"width: 20%;\">
-                    <div class=\"card m-1\">
+        echo "  <div class=\"p-1\" style=\"width: 20%;\">
+                    <div class=\"card  h-100\">
                         <img src=\"$url\" class=\"card-img-top\" alt=\"...\" style=\"height:200px; aspect-ratio:1; object-fit: cover; \">
                         <div class=\"card-body d-flex justify-content-between\">
                             <div>
