@@ -5,7 +5,6 @@
 function printImages(PDOStatement $images): void
 {
     require("env.php");
-    global $userId;
 
     while ($row = $images->fetch()) {
         $url = $baseDomain . $baseUrl . $uploadsFolder . $row["fitxer"];
@@ -18,6 +17,7 @@ function printImages(PDOStatement $images): void
         } else {
             $display = "d-none";
         }
+        $imageId = $row["id"];
         echo "  <div style=\"width: 20%;\">
                     <div class=\"card m-1\">
                         <img src=\"$url\" class=\"card-img-top\" alt=\"...\" style=\"height:200px; aspect-ratio:1; object-fit: cover; \">
