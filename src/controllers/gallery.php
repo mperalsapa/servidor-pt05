@@ -31,11 +31,4 @@ if (checkLogin() && $meImg) {
     $images = getImagePage($pdo, $page, $itemsPerPage);
 }
 
-
-// $parsed = parse_url($_SERVER["REQUEST_URI"]);
-
-// print("<pre>" . print_r($parsed, true) . "</pre>");
-
-
-
 include_once("src/views/gallery.vista.php");
