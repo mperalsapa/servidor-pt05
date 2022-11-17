@@ -18,13 +18,15 @@ function printImages(PDOStatement $images): void
             $display = "d-none";
         }
         $imageId = $row["id"];
+        $imageTitle = $row["titol"];
+        $userName = $row["nom"] . " " . $row["cognoms"];
         echo "  <div style=\"width: 20%;\">
                     <div class=\"card m-1\">
                         <img src=\"$url\" class=\"card-img-top\" alt=\"...\" style=\"height:200px; aspect-ratio:1; object-fit: cover; \">
                         <div class=\"card-body d-flex justify-content-between\">
                             <div>
-                                <h5 class=\"card-title\">Títol</h5>
-                                <p class=\"card-text\">Marc Peral</p>
+                                <h5 class=\"card-title\">$imageTitle</h5>
+                                <p class=\"card-text\">$userName</p>
                             </div>
                             <!-- Button trigger modal -->
                             <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">

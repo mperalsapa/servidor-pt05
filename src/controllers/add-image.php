@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // guardem les dades de la imatge a la base de dades. En cas d'error retornem a l'usuari l'error i no guardem.
     $pdo = getMysqlPDO();
-    if (!addImage($pdo, getUserIDSession(), "", $fileName)) {
+    if (!addImage($pdo, getUserIDSession(), $imageTitle, $fileName)) {
         returnAlert("El fitxer no s'ha pogut guardar. Torna a provar mes tard. Si l'error persisteix, contacta amb un administrador.", "danger", "src/views/add-image.vista.php", null);
     }
 
