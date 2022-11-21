@@ -7,7 +7,7 @@ function printImages(PDOStatement $images): void
     require("env.php");
 
     while ($row = $images->fetch()) {
-        $url = $baseDomain . $baseUrl . $uploadsFolder . $row["fitxer"];
+        $url = getImageUrl($row["fitxer"]);
         if (checkLogin()) {
             $userId = getUserIDSession();
         }
@@ -54,4 +54,12 @@ function printImages(PDOStatement $images): void
                     </div>
                 </div>";
     }
+}
+
+function getImageUrl(string $filename): string
+{
+    require("env.php");
+    $path = $baseDomain . $baseUrl . $uploadsFolder . $filename;
+
+    return $path;
 }
