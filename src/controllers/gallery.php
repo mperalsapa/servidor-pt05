@@ -13,6 +13,12 @@ if (isset($_GET["selectImage"])) {
     redirectClient("write-article?id=$articleId&newImage=$imageId");
 }
 
+if (isset($_GET["a"]) && $_GET["a"] == "selectImage") {
+    $selecting = true;
+} else {
+    $selecting = false;
+}
+
 if (isset($_GET["view"])) {
     $meImg = $_GET["view"] == "mine" ? true : false;
 } else {

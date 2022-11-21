@@ -30,9 +30,7 @@
                 $meActive = "active";
             }
 
-            $selecting = true;
-            if (empty($_GET["a"]) || $_GET["a"] != "selectImage") {
-                $selecting = false;
+            if (!$selecting) {
                 echo "<div class=\"btn-group m-1 $displayImgSelection\" role=\"group\" aria-label=\"Basic example\">";
                 echo "<a class=\"btn btn-primary $allActive\" href=\"gallery?p=$page&view=all\">Totes</a>";
                 echo "<a class=\"btn btn-primary $meActive\" href=\"gallery?p=$page&view=mine\">Meves</a>";
