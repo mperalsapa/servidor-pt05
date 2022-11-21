@@ -75,3 +75,23 @@ function setUserLoggedinData(PDO $pdo, string $email): void
     setUserID($id);
     setLoggedin(true);
 }
+
+function setLastArticleWrite(int $articleId): void
+{
+    $_SESSION["lastArticleWrite"] = $articleId;
+}
+
+function getLastArticleWrite(): int
+{
+    return $_SESSION["lastArticleWrite"];
+}
+
+function setSelectedImage(int $imageId): void
+{
+    $_SESSION["selectedImage"] = $imageId;
+}
+
+function getSelectedImage(): int
+{
+    return $_SESSION["selectedImage"];
+}

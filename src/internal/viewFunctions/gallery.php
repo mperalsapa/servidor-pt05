@@ -2,10 +2,15 @@
 
 // aquesta funcio agafa una resposta de la base de dades que conte les dades de les imagtes
 // genera una url amb aquesta informacio i mostra la imatge
-function printImages(PDOStatement $images): void
+function printImages(PDOStatement $images, bool $selecting): void
 {
     require("env.php");
 
+    if ($selecting) {
+        $selecting = "";
+    } else {
+        $selecting = "d-none";
+    }
     while ($row = $images->fetch()) {
         $url = getImageUrl($row["fitxer"]);
         if (checkLogin()) {
@@ -17,21 +22,25 @@ function printImages(PDOStatement $images): void
         } else {
             $display = "d-none";
         }
+
         $imageId = $row["id"];
         $imageTitle = $row["titol"];
         $userName = $row["nom"] . " " . $row["cognoms"];
         echo "  <div class=\"p-1\" style=\"width: 20%;\">
                     <div class=\"card  h-100\">
                         <img src=\"$url\" class=\"card-img-top\" alt=\"...\" style=\"height:200px; aspect-ratio:1; object-fit: cover; \">
-                        <div class=\"card-body d-flex justify-content-between\">
+                        <div class=\"card-body d-flex flex-column justify-content-between\">
                             <div>
                                 <h5 class=\"card-title\">$imageTitle</h5>
                                 <p class=\"card-text\">$userName</p>
                             </div>
-                            <!-- Button trigger modal -->
-                            <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">
-                                <i class=\"bi bi-trash\"></i>
-                            </button>
+                            <div class=\"d-flex justify-content-between\">
+                                <a class=\"$selecting btn btn-sm btn-primary\" href=gallery?selectImage=$imageId>Seleccionar</a>
+                                <!-- Button trigger modal -->
+                                <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">
+                                    <i class=\"bi bi-trash\"></i>
+                                </button>
+                            </div>
                             <!-- Modal -->
                             <div class=\"modal fade\" id=\"imageModal$imageId\" tabindex=\"-1\" aria-labelledby=\"imageModalLabel$imageId\" aria-hidden=\"true\">
                                 <div class=\"modal-dialog\">

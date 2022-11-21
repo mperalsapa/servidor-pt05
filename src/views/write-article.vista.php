@@ -30,11 +30,22 @@
                     </div>
                     <div class="col d-flex justify-content-between flex-column">
                         <label for="">Imatge</label>
+                        <input id="imageId" name="imageId" type="hidden" value="<?= $viewData["imageId"] ?>">
                         <div class="col-6 mb-3 w-100 position-relative border" style="min-height: 200px;">
-                            <img class="w-100" src="http://localhost/servidor/UF2/pt05/img/user_uploads/logo.png" alt="test image">
+                            <?php
+                            if (!empty($viewData["imageId"])) {
+                                include_once("src/internal/viewFunctions/gallery.php");
+                                include_once("src/internal/db/mysql.php");
+                                $pdo = getMysqlPDO();
+                                $imageName = getImageName($pdo, $viewData["imageId"]);
+                                $url = getImageUrl($imageName);
+                                echo "<img class=\"w-100\" src=\"$url\" alt=\"test image\">";
+                            }
+                            ?>
+
                             <span class="position-absolute translate-middle top-50 start-50">Previsualitzacio</span>
                         </div>
-                        <a class="btn btn-primary" href="gallery">Seleccionar imatge</a>
+                        <a class="btn btn-primary" href="gallery?a=selectImage">Seleccionar imatge</a>
                     </div>
                 </div>
                 <div class="col-5 col-md-4 col-lg-3 col-xxl-2">

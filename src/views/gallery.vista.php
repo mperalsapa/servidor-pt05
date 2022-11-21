@@ -30,25 +30,27 @@
                 $meActive = "active";
             }
 
-            echo "<div class=\"btn-group m-1 $displayImgSelection\" role=\"group\" aria-label=\"Basic example\">";
-            echo "<a class=\"btn btn-primary $allActive\" href=\"gallery?p=$page&view=all\">Totes</a>";
-            echo "<a class=\"btn btn-primary $meActive\" href=\"gallery?p=$page&view=mine\">Meves</a>";
-            echo "</div>";
+            $selecting = true;
+            if (empty($_GET["a"]) || $_GET["a"] != "selectImage") {
+                $selecting = false;
+                echo "<div class=\"btn-group m-1 $displayImgSelection\" role=\"group\" aria-label=\"Basic example\">";
+                echo "<a class=\"btn btn-primary $allActive\" href=\"gallery?p=$page&view=all\">Totes</a>";
+                echo "<a class=\"btn btn-primary $meActive\" href=\"gallery?p=$page&view=mine\">Meves</a>";
+                echo "</div>";
+            }
         }
 
-        ?>
-        <div class="d-flex flex-wrap">
-            <?php
-            if ($images != null) {
-                printImages($images);
-            } else {
-                echo "No hi ha imatges a mostrar... ¬¬";
-            }
-            ?>
 
-        </div>
+        echo "<div class=\"d-flex flex-wrap\">";
 
-        <?php
+        if ($images != null) {
+            printImages($images, $selecting);
+        } else {
+            echo "No hi ha imatges a mostrar... ¬¬";
+        }
+
+        echo "</div>";
+
         printPagination($page, 1, $maxPage, 6)
         ?>
     </div>

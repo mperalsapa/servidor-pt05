@@ -21,6 +21,7 @@ function getArticleData(int $articleId = NULL): array
             "id" => 0,
             "canDelete" => 0
         );
+        setLastArticleWrite($result["id"]);
         return $result;
     }
 
@@ -41,10 +42,12 @@ function getArticleData(int $articleId = NULL): array
         "formSubmitButton" => "Guardar",
         "date" => $row["data"],
         "article" => $row["article"],
+        "imageId" => $row["imatge"],
         "id" => $row["id"],
         "canDelete" => 1
     );
 
+    setLastArticleWrite($result["id"]);
     return $result;
 }
 
@@ -62,6 +65,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     } else {
         $viewData = getArticleData();
     }
+
+    if (!empty($_GET["newImage"])) {
+        $imageId = $_GET["newImage"];
+        $viewData["imageId"] = $imageId;
+    }
+
     // mostrem la vista
     include_once("src/views/write-article.vista.php");
 }
@@ -87,17 +96,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $formResult = "La data de l'article es buida.";
         returnAlert($formResult, "danger", "src/views/write-article.vista.php", $viewData);
     }
-    $articleData["date"] = $_POST["article-date"];
+    $viewData["date"] = $_POST["article-date"];
+
+    $viewData["imageId"] = intval($_POST["imageId"]);
 
     // iniciem connexio amb la base de dades. Si l'id no es present, vol dir que hem d'afegir un nou article
     $pdo = getMysqlPDO();
     if (!isset($_GET["id"])) {
-        addArticle($pdo, $_SESSION["id"], $_POST["article"], $_POST["article-date"]);
+        addArticle($pdo, $_SESSION["id"], $viewData["article"], $viewData["imageId"], $viewData["article-date"]);
         redirectClient("/");
     }
 
     // en cas d'haver-hi id, actualitzem l'article
     $articleId = $_GET["id"];
-    updateArticle($pdo, $articleId, $viewData["article"], $articleData["date"]);
+    updateArticle($pdo, $articleId, $viewData["article"], $viewData["imageId"], $viewData["date"]);
     redirectClient("/");
 }

@@ -5,7 +5,13 @@ include_once("src/internal/viewFunctions/pagging.php");
 include_once("src/internal/db/session_manager.php");
 include_once("src/internal/db/mysql.php");
 include_once("src/internal/viewFunctions/gallery.php");
+include_once("src/internal/viewFunctions/browser.php");
 
+if (isset($_GET["selectImage"])) {
+    $imageId = intval($_GET["selectImage"]);
+    $articleId = getLastArticleWrite();
+    redirectClient("write-article?id=$articleId&newImage=$imageId");
+}
 
 if (isset($_GET["view"])) {
     $meImg = $_GET["view"] == "mine" ? true : false;
