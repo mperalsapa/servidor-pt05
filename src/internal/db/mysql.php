@@ -36,7 +36,7 @@ function getArticlePage(PDO $conn, int $page, int $maxArtPerPage): PDOStatement
 {
     $minim = ($page * $maxArtPerPage) - $maxArtPerPage;
     $maxim = $maxArtPerPage;
-    $pdo = $conn->prepare("SELECT a.id, a.article, a.autor, DATE_FORMAT(a.data, '%d/%m/%Y') as data, u.nom, u.cognoms FROM article a LEFT JOIN usuari u ON u.id = a.autor ORDER BY a.data DESC LIMIT :minLimit, :maxLimit ");
+    $pdo = $conn->prepare("SELECT a.id, a.titol, i.fitxer, a.article, a.autor, DATE_FORMAT(a.data, '%d/%m/%Y') as data, u.nom, u.cognoms FROM article a INNER JOIN usuari u ON u.id = a.autor INNER JOIN imatge i ON i.id = a.imatge ORDER BY a.data DESC LIMIT :minLimit, :maxLimit ");
     $pdo->bindParam(":minLimit", $minim, PDO::PARAM_INT);
     $pdo->bindParam(":maxLimit", $maxim, PDO::PARAM_INT);
     $pdo->execute();
@@ -48,7 +48,7 @@ function getArticlePageByUser(PDO $conn, int $page, int $maxArtPerPage, int $use
 {
     $min = ($page * $maxArtPerPage) - $maxArtPerPage;
     $max = $maxArtPerPage;
-    $pdo = $conn->prepare("SELECT a.id, a.article, a.autor, DATE_FORMAT(a.data, '%d/%m/%Y') as data , u.nom, u.cognoms FROM article a LEFT JOIN usuari u ON u.id = a.autor WHERE autor = :autorId ORDER BY a.data DESC LIMIT :minLimit, :maxLimit ");
+    $pdo = $conn->prepare("SELECT a.id, a.titol, i.fitxer, a.article, a.autor, DATE_FORMAT(a.data, '%d/%m/%Y') as data, u.nom, u.cognoms FROM article a INNER JOIN usuari u ON u.id = a.autor INNER JOIN imatge i ON i.id = a.imatge WHERE a.autor = :autorId ORDER BY a.data DESC LIMIT :minLimit, :maxLimit ");
     $pdo->bindParam(":autorId", $userId, PDO::PARAM_INT);
     $pdo->bindParam(":minLimit", $min, PDO::PARAM_INT);
     $pdo->bindParam(":maxLimit", $max, PDO::PARAM_INT);

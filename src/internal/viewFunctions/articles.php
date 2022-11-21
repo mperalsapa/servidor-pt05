@@ -2,6 +2,7 @@
 // Marc Peral
 // script que s'encarrega de mostrar els articles en la pagina principal
 
+include_once("src/internal/viewFunctions/gallery.php");
 
 // aquesta funcio mostra els articles que es passen
 function printArticlesbyUserId(?PDOStatement $articles): void
@@ -14,7 +15,11 @@ function printArticlesbyUserId(?PDOStatement $articles): void
         }
         // iterem sobre cada article que hi tenim per mostrar-lo
         while ($row = $articles->fetch()) {
-            echo "<div class=\" border border-dark m-4 p-4 rounded  \">";
+            echo "<div class=\" border border-dark m-4 p-4 rounded overflow-hidden\">";
+            echo "<h2>";
+            echo $row["titol"];
+            echo "</h2>";
+            echo "<img class=\"float-md-end \" src=\"" . getImageUrl($row["fitxer"]) . "\" alt=\"test image\">";
             echo "<p>";
             echo $row["article"];
             echo "</p>";

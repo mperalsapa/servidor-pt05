@@ -16,7 +16,7 @@
 	include_once("src/internal/viewFunctions/navbar.php");
 	?>
 
-	<div class="contenidor container bg-white rounded p-4">
+	<div class="col-12 col-sm-10 col-md-8 col-xl-6 mx-auto bg-white rounded p-4">
 		<?php
 		$displayArticleSelection = checkLogin() ? "" : "d-none";
 		$meActive = "";
