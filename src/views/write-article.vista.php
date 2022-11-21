@@ -23,12 +23,21 @@
                     </ol>
                 </nav>
                 <h1><?= $viewData["formTitle"] ?></h1>
-                <div class="form-group">
-                    <label for="article">Article</label>
-                    <textarea class="form-control" name="article" id="article" rows="10"><?= $viewData["article"] ?></textarea>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="article">Article</label>
+                        <textarea class="form-control" name="article" id="article" rows="10"><?= $viewData["article"] ?></textarea>
+                    </div>
+                    <div class="col d-flex justify-content-between flex-column">
+                        <label for="">Imatge</label>
+                        <div class="col-6 mb-3 w-100 position-relative border" style="min-height: 200px;">
+                            <img class="w-100" src="http://localhost/servidor/UF2/pt05/img/user_uploads/logo.png" alt="test image">
+                            <span class="position-absolute translate-middle top-50 start-50">Previsualitzacio</span>
+                        </div>
+                        <a class="btn btn-primary" href="gallery">Seleccionar imatge</a>
+                    </div>
                 </div>
                 <div class="col-5 col-md-4 col-lg-3 col-xxl-2">
-
                     <label for="article-date">Data</label>
                     <input class="form-control" name="article-date" id="article-date" type="date" value=<?= $viewData["date"] ?>>
                 </div>
