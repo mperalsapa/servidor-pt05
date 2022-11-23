@@ -107,7 +107,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $viewData["date"] = $_POST["article-date"];
 
-    $viewData["imageId"] = intval($_POST["imageId"]);
+    if (!empty($_POST["imageId"])) {
+        $viewData["imageId"] = intval($_POST["imageId"]);
+    } else {
+        $viewData["imageId"] = null;
+    }
 
     // iniciem connexio amb la base de dades. Si l'id no es present, vol dir que hem d'afegir un nou article
     $pdo = getMysqlPDO();
