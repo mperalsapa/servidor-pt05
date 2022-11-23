@@ -23,6 +23,12 @@
                     </ol>
                 </nav>
                 <h1><?= $viewData["formTitle"] ?></h1>
+
+                <div class="mb-3 col-12">
+                    <label class="col-12">Titol de l'article
+                        <input type="text" class="form-control col-12" id="articleTitle" name="articleTitle" placeholder="Titol de l'article" value="<?= $viewData["articleTitle"] ?>">
+                    </label>
+                </div>
                 <div class="row">
                     <div class="form-group col">
                         <label for="article">Article</label>

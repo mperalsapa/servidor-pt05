@@ -18,6 +18,8 @@ function getArticleData(int $articleId = NULL): array
             "formSubmitButton" => "Crear",
             "date" => "",
             "article" => "",
+            "articleTitle" => "",
+            "imageId" => 0,
             "id" => 0,
             "canDelete" => 0
         );
@@ -42,6 +44,7 @@ function getArticleData(int $articleId = NULL): array
         "formSubmitButton" => "Guardar",
         "date" => $row["data"],
         "article" => $row["article"],
+        "articleTitle" => $row["titol"],
         "imageId" => $row["imatge"],
         "id" => $row["id"],
         "canDelete" => 1
@@ -85,6 +88,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $viewData = getArticleData();
     }
 
+    if (empty($_POST["articleTitle"])) {
+        $formResult = "El titol de l'article es buit.";
+        returnAlert($formResult, "danger", "src/views/write-article.vista.php", $viewData);
+    }
+    $viewData["articleTitle"] = $_POST["articleTitle"];
+
     // comprovem si els camps del formulari son buits. Si ho son, mostrem error informant. Si no ho son, els guardem
     if (empty($_POST["article"])) {
         $formResult = "L'article es buit, si el vols esborrar, fes clic a esborrar.";
@@ -103,12 +112,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // iniciem connexio amb la base de dades. Si l'id no es present, vol dir que hem d'afegir un nou article
     $pdo = getMysqlPDO();
     if (!isset($_GET["id"])) {
-        addArticle($pdo, $_SESSION["id"], $viewData["article"], $viewData["imageId"], $viewData["article-date"]);
+        addArticle($pdo, $_SESSION["id"], $viewData["articleTitle"], $viewData["article"], $viewData["imageId"], $viewData["date"]);
         redirectClient("/");
     }
 
     // en cas d'haver-hi id, actualitzem l'article
     $articleId = $_GET["id"];
-    updateArticle($pdo, $articleId, $viewData["article"], $viewData["imageId"], $viewData["date"]);
+    updateArticle($pdo, $articleId, $viewData["articleTitle"], $viewData["article"], $viewData["imageId"], $viewData["date"]);
     redirectClient("/");
 }

@@ -145,9 +145,10 @@ function getUserID(PDO $conn, string $email): int
 }
 
 
-function addArticle(PDO $conn, int $userId, string $article, int $imageId, string $date): void
+function addArticle(PDO $conn, int $userId, string $articleTitle, string $article, int $imageId, string $date): void
 {
-    $pdo = $conn->prepare("INSERT INTO article (article, autor, imatge, data) VALUES (:article, :userId, :imageId, :articleDate)");
+    $pdo = $conn->prepare("INSERT INTO article (titol, article, autor, imatge, data) VALUES (:articleTitle, :article, :userId, :imageId, :articleDate)");
+    $pdo->bindParam(":articleTitle", $articleTitle);
     $pdo->bindParam(":article", $article);
     $pdo->bindParam(":userId", $userId);
     $pdo->bindParam(":imageId", $imageId, PDO::PARAM_INT);
@@ -155,10 +156,11 @@ function addArticle(PDO $conn, int $userId, string $article, int $imageId, strin
     $pdo->execute();
 }
 
-function updateArticle(PDO $conn, int $articleId, string $article, int $imageId, string $date): void
+function updateArticle(PDO $conn, int $articleId, string $articleTitle, string $article, int $imageId, string $date): void
 {
     echo "updating article. id: $articleId <br> body: $article. <br> Image id: $imageId <br> date: $date";
-    $pdo = $conn->prepare("UPDATE article SET article = :article, imatge = :imageId, data = :articleDate WHERE article.id = :articleId");
+    $pdo = $conn->prepare("UPDATE article SET titol = :articleTitle,  article = :article, imatge = :imageId, data = :articleDate WHERE article.id = :articleId");
+    $pdo->bindParam(":articleTitle", $articleTitle);
     $pdo->bindParam(":article", $article);
     $pdo->bindParam(":articleDate", $date);
     $pdo->bindParam(":imageId", $imageId, PDO::PARAM_INT);
