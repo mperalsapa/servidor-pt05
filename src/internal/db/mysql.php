@@ -156,7 +156,7 @@ function addArticle(PDO $conn, int $userId, string $articleTitle, string $articl
     $pdo->execute();
 }
 
-function updateArticle(PDO $conn, int $articleId, string $articleTitle, string $article, int $imageId, string $date): void
+function updateArticle(PDO $conn, int $articleId, string $articleTitle, string $article, ?int $imageId, string $date): void
 {
     echo "updating article. id: $articleId <br> body: $article. <br> Image id: $imageId <br> date: $date";
     $pdo = $conn->prepare("UPDATE article SET titol = :articleTitle,  article = :article, imatge = :imageId, data = :articleDate WHERE article.id = :articleId");
