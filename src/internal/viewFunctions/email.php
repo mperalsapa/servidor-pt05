@@ -74,7 +74,8 @@ function sendChangeEmailToken(string $emailTo, string $token): bool
     $emailSender = "no-reply@mperalsapa.cf";
     $emailSenderName = "Articles de Pel·lícules";
     $changeEmailLink = $baseDomain . $baseUrl . "change-email?token=$token";
-    $htmlContent = "<h1>Sol·licitut de Canvi de Correu Electrónic</h1><div><p>Fes click en aquest enllaç: <a href=\"$changeEmailLink\">$changeEmailLink</a> o copia i enganxa en el navegador.</p><p>Si no has sigut tu, et recomanem que canviis la contrasenya ja que algu ha iniciat sessio al teu compte. Fes click en aquest enllaç per canviar la contrasenya <a href=\"https://sp4.mperalsapa.cf/change-password\">https://sp4.mperalsapa.cf/change-password</a>.</p></div><p>Articles de Pel·licules</p>";
+    $changePasswordLocation = $baseDomain . $baseUrl . "change-password";
+    $htmlContent = "<h1>Sol·licitut de Canvi de Correu Electrónic</h1><div><p>Fes click en aquest enllaç: <a href=\"$changeEmailLink\">$changeEmailLink</a> o copia i enganxa en el navegador.</p><p>Si no has sigut tu, et recomanem que canviis la contrasenya ja que algu ha iniciat sessio al teu compte. Fes click en aquest enllaç per canviar la contrasenya <a href=\"$changePasswordLocation\">$changePasswordLocation</a>.</p></div><p>Articles de Pel·licules</p>";
     $subject = "Canvi de Correu Electrónic";
 
     $postContent = json_encode(
@@ -134,7 +135,7 @@ function sendDeleteAccountToken(string $emailTo, string $token): bool
     $emailSender = "no-reply@mperalsapa.cf";
     $emailSenderName = "Articles de Pel·lícules";
     $changeEmailLink = $baseDomain . $baseUrl . "delete-account?token=$token";
-    $htmlContent = "<h1>Sol·licitut d'eliminacio de compte</h1><div><p>RECORDA QUE AQUESTA ACCIO ES IRREVERSIBLE.</p><p>Fes click en aquest enllaç: <a href=\"$changeEmailLink\">$changeEmailLink</a> o copia i enganxa en el navegador.</p><p>Si no has sigut tu, et recomanem que canviis la contrasenya ja que algu ha iniciat sessio al teu compte. Fes click en aquest enllaç per canviar la contrasenya <a href=\"https://sp4.mperalsapa.cf/change-password\">https://sp4.mperalsapa.cf/change-password</a>.</p></div><p>Articles de Pel·licules</p>";
+    $htmlContent = "<h1>Sol·licitut d'eliminacio de compte</h1><div><p>RECORDA QUE AQUESTA ACCIO ES IRREVERSIBLE.</p><p>Fes click en aquest enllaç: <a href=\"$changeEmailLink\">$changeEmailLink</a> o copia i enganxa en el navegador.</p><p>Si no has sigut tu, et recomanem que canviis la contrasenya ja que algu ha iniciat sessio al teu compte. Fes click en aquest enllaç per canviar la contrasenya <a href=\"$changePasswordLocation\">$changePasswordLocation</a>.</p></div><p>Articles de Pel·licules</p>";
     $subject = "Eliminacio de compte";
 
     $postContent = json_encode(
