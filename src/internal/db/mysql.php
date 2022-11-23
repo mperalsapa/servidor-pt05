@@ -307,11 +307,12 @@ function removeUserAccount(PDO $conn, int $userId): void
 // aquesta funcio afegeix a la base de dades la informacio d'una imatge que s'ha pujat al servidor
 // retorna true si l'insert s'ha produit correctament
 // retorna false si l'insert no s'ha pogut executar
-function addImage(PDO $conn, int $userId, string $title, string $fileName): bool
+function addImage(PDO $conn, int $userId, string $title, string $description, string $fileName): bool
 {
-    $pdo = $conn->prepare("INSERT INTO imatge (autor, titol, fitxer) VALUES (:id, :titol, :fitxer)");
+    $pdo = $conn->prepare("INSERT INTO imatge (autor, titol, descripcio, fitxer) VALUES (:id, :titol, :description, :fitxer)");
     $pdo->bindParam(":id", $userId);
     $pdo->bindParam(":titol", $title);
+    $pdo->bindParam(":description", $description);
     $pdo->bindParam(":fitxer", $fileName);
     $pdo->execute();
 
@@ -322,6 +323,19 @@ function addImage(PDO $conn, int $userId, string $title, string $fileName): bool
     }
 }
 
+function updateImageMetaData(PDO $conn, int $imageId, string $title, string $description): bool
+{
+    $pdo = $conn->prepare("UPDATE imatge SET descripcio = :imageDescription WHERE imatge.id = :imageId");
+    $pdo->bindParam(":imageDescription", $description);
+    $pdo->bindParam(":imageId", $imageId);
+    $pdo->execute();
+
+    if ($pdo->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function getImageCount(PDO $conn): int
 {
@@ -348,7 +362,7 @@ function getImagePage(PDO $conn, int $page, int $maxImgPerPage): ?PDOStatement
     $min = ($page * $maxImgPerPage) - $maxImgPerPage;
     $max = $maxImgPerPage;
 
-    $pdo = $conn->prepare("SELECT i.id, i.autor, i.titol, i.fitxer, u.nom, u.cognoms FROM imatge as i LEFT JOIN usuari u ON u.id = i.autor LIMIT :minLimit, :maxLimit");
+    $pdo = $conn->prepare("SELECT i.id, i.autor, i.titol,i.descripcio, i.fitxer, u.nom, u.cognoms FROM imatge as i LEFT JOIN usuari u ON u.id = i.autor LIMIT :minLimit, :maxLimit");
     $pdo->bindParam(":minLimit", $min, PDO::PARAM_INT);
     $pdo->bindParam(":maxLimit", $max, PDO::PARAM_INT);
     $pdo->execute();
@@ -366,7 +380,7 @@ function getImagePageByUserID(PDO $conn, int $page, int $maxImgPerPage, int $use
     $min = ($page * $maxImgPerPage) - $maxImgPerPage;
     $max = $maxImgPerPage;
 
-    $pdo = $conn->prepare("SELECT i.id, i.autor, i.titol, i.fitxer, u.nom, u.cognoms FROM imatge as i LEFT JOIN usuari u ON u.id = i.autor WHERE i.autor = :id LIMIT :minLimit, :maxLimit");
+    $pdo = $conn->prepare("SELECT i.id, i.autor, i.titol,i.descripcio, i.fitxer, u.nom, u.cognoms FROM imatge as i LEFT JOIN usuari u ON u.id = i.autor WHERE i.autor = :id LIMIT :minLimit, :maxLimit");
     $pdo->bindParam(":id", $userId);
     $pdo->bindParam(":minLimit", $min, PDO::PARAM_INT);
     $pdo->bindParam(":maxLimit", $max, PDO::PARAM_INT);
@@ -412,6 +426,19 @@ function getImageName(PDO $conn, int $imageId): ?string
     if ($pdo->rowCount() > 0) {
         $row = $pdo->fetch();
         return $row["fitxer"];
+    } else {
+        return null;
+    }
+}
+
+function getImageMeta(PDO $conn, int $imageId): mixed
+{
+    $pdo = $conn->prepare(("SELECT titol, descripcio FROM imatge WHERE imatge.id = :imageId"));
+    $pdo->bindParam(":imageId", $imageId);
+    $pdo->execute();
+    if ($pdo->rowCount() > 0) {
+        $row = $pdo->fetch();
+        return $row;
     } else {
         return null;
     }

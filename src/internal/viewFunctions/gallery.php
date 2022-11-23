@@ -25,21 +25,25 @@ function printImages(PDOStatement $images, bool $selecting): void
 
         $imageId = $row["id"];
         $imageTitle = $row["titol"];
+        $description = $row["descripcio"];
         $userName = $row["nom"] . " " . $row["cognoms"];
-        echo "  <div class=\"p-1\" style=\"width: 20%;\">
+        echo "  <div class=\"p-1 col-12 col-sm-6  col-lg-4 col-xl-3\">
                     <div class=\"card  h-100\">
                         <img src=\"$url\" class=\"card-img-top\" alt=\"...\" style=\"height:200px; aspect-ratio:1; object-fit: cover; \">
                         <div class=\"card-body d-flex flex-column justify-content-between\">
                             <div>
                                 <h5 class=\"card-title\">$imageTitle</h5>
-                                <p class=\"card-text\">$userName</p>
+                                <p class=\"card-text\">$description</p>
                             </div>
-                            <div class=\"d-flex justify-content-between\">
-                                <a class=\"$selecting btn btn-sm btn-primary\" href=gallery?selectImage=$imageId>Seleccionar</a>
-                                <!-- Button trigger modal -->
-                                <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">
-                                    <i class=\"bi bi-trash\"></i>
-                                </button>
+                            <div>
+                                <p class=\"card-text\">$userName</p>
+                                <div class=\"d-flex justify-content-between\">
+                                    <a class=\"$selecting btn btn-sm btn-primary\" href=gallery?selectImage=$imageId>Seleccionar</a>
+                                    <!-- Button trigger modal -->
+                                    <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">
+                                        <i class=\"bi bi-trash\"></i>
+                                    </button>
+                                </div>
                             </div>
                             <!-- Modal -->
                             <div class=\"modal fade\" id=\"imageModal$imageId\" tabindex=\"-1\" aria-labelledby=\"imageModalLabel$imageId\" aria-hidden=\"true\">
