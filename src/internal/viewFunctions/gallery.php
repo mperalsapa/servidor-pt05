@@ -17,11 +17,12 @@ function printImages(PDOStatement $images, bool $selecting): void
             $userId = getUserIDSession();
         }
 
-        if (isset($userId) && $row["autor"] == $userId) {
+        if (isset($userId) && $row["autor"] == $userId && $row["utilitzada"] < 1) {
             $display = "";
         } else {
             $display = "d-none";
         }
+
 
         $imageId = $row["id"];
         $imageTitle = $row["titol"];

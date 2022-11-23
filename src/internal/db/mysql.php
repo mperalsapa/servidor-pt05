@@ -364,7 +364,7 @@ function getImagePage(PDO $conn, int $page, int $maxImgPerPage): ?PDOStatement
     $min = ($page * $maxImgPerPage) - $maxImgPerPage;
     $max = $maxImgPerPage;
 
-    $pdo = $conn->prepare("SELECT i.id, i.autor, i.titol,i.descripcio, i.fitxer, u.nom, u.cognoms FROM imatge as i LEFT JOIN usuari u ON u.id = i.autor LIMIT :minLimit, :maxLimit");
+    $pdo = $conn->prepare("SELECT i.id, i.autor, i.titol,i.descripcio, i.fitxer, u.nom, u.cognoms, (SELECT count(*) FROM article WHERE imatge = i.id) as utilitzada FROM imatge as i LEFT JOIN usuari u ON u.id = i.autor LIMIT :minLimit, :maxLimit");
     $pdo->bindParam(":minLimit", $min, PDO::PARAM_INT);
     $pdo->bindParam(":maxLimit", $max, PDO::PARAM_INT);
     $pdo->execute();
@@ -382,7 +382,7 @@ function getImagePageByUserID(PDO $conn, int $page, int $maxImgPerPage, int $use
     $min = ($page * $maxImgPerPage) - $maxImgPerPage;
     $max = $maxImgPerPage;
 
-    $pdo = $conn->prepare("SELECT i.id, i.autor, i.titol,i.descripcio, i.fitxer, u.nom, u.cognoms FROM imatge as i LEFT JOIN usuari u ON u.id = i.autor WHERE i.autor = :id LIMIT :minLimit, :maxLimit");
+    $pdo = $conn->prepare("SELECT i.id, i.autor, i.titol,i.descripcio, i.fitxer, u.nom, u.cognoms, (SELECT count(*) FROM article WHERE imatge = i.id) as utilitzada FROM imatge as i LEFT JOIN usuari u ON u.id = i.autor WHERE i.autor = :id LIMIT :minLimit, :maxLimit");
     $pdo->bindParam(":id", $userId);
     $pdo->bindParam(":minLimit", $min, PDO::PARAM_INT);
     $pdo->bindParam(":maxLimit", $max, PDO::PARAM_INT);
@@ -406,6 +406,14 @@ function getImageAuthor(PDO $conn, int $imageId): ?int
     }
 
     return null;
+}
+
+function getImageUsage(PDO $conn, int $imageId): int
+{
+    $pdo = $conn->prepare("SELECT count(*) FROM article WHERE article.imatge = :imageId");
+    $pdo->bindParam(":imageId", $imageId);
+    $pdo->execute();
+    return $pdo->rowCount();
 }
 
 function deleteImage(PDO $conn, int $imageId): bool

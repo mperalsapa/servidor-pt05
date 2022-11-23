@@ -39,14 +39,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         redirectClient("gallery");
     }
 
-    // si tot es correcte, esborrem la imatge i redireccionem a l'arrel
-    if (deleteImage($pdo, $imageId)) {
-        $filePath = $uploadsFolder . $imageName;
-        unlink($filePath);
+    if (getImageUsage($pdo, $imageId) == 0) {
 
-        redirectClient("gallery");
+        // si tot es correcte, esborrem la imatge i redireccionem a l'arrel
+        if (deleteImage($pdo, $imageId)) {
+            $filePath = $uploadsFolder . $imageName;
+            unlink($filePath);
+
+            redirectClient("gallery");
+        } else {
+            echo "S'ha produit un error esborrant la teva imatge. Torna a provar mes tard i si el problema persisteix, contacta amb un administrador";
+        }
     } else {
-        echo "S'ha produit un error esborrant la teva imatge. Torna a provar mes tard i si el problema persisteix, contacta amb un administrador";
+        echo "Aquesta imatge s'esta fent servir en articles existents, no la pots esborrar.";
     }
+
     redirectClient("gallery");
 }
