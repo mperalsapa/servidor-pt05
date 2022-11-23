@@ -19,7 +19,9 @@ function printArticlesbyUserId(?PDOStatement $articles): void
             echo "<h2>";
             echo $row["titol"];
             echo "</h2>";
-            echo "<img class=\"float-md-end col-md-6 col-12 m-3\" src=\"" . getImageUrl($row["fitxer"]) . "\" alt=\"test image\">";
+            if (!is_null($row["fitxer"])) {
+                echo "<img class=\"float-md-end col-md-6 col-12 m-3\" src=\"" . getImageUrl($row["fitxer"]) . "\" alt=\"test image\">";
+            }
             echo "<p>";
             echo $row["article"];
             echo "</p>";
