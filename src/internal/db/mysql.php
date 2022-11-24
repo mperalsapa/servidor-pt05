@@ -410,10 +410,11 @@ function getImageAuthor(PDO $conn, int $imageId): ?int
 
 function getImageUsage(PDO $conn, int $imageId): int
 {
-    $pdo = $conn->prepare("SELECT count(*) FROM article WHERE article.imatge = :imageId");
+    $pdo = $conn->prepare("SELECT count(*) as Count FROM article WHERE article.imatge = :imageId");
     $pdo->bindParam(":imageId", $imageId);
     $pdo->execute();
-    return $pdo->rowCount();
+    $row = $pdo->fetch();
+    return $row["Count"];
 }
 
 function deleteImage(PDO $conn, int $imageId): bool
