@@ -444,7 +444,7 @@ function getImageName(PDO $conn, int $imageId): ?string
 
 function getImageMeta(PDO $conn, int $imageId): mixed
 {
-    $pdo = $conn->prepare(("SELECT titol, descripcio FROM imatge WHERE imatge.id = :imageId"));
+    $pdo = $conn->prepare(("SELECT id, autor, titol, descripcio FROM imatge WHERE imatge.id = :imageId"));
     $pdo->bindParam(":imageId", $imageId);
     $pdo->execute();
     if ($pdo->rowCount() > 0) {
@@ -468,6 +468,20 @@ function renameImageFile(PDO $conn, string $fileName, string $newFileName): bool
     $pdo = $conn->prepare("UPDATE imatge SET fitxer = :newFileName WHERE imatge.fitxer = :fileName");
     $pdo->bindParam(":fileName", $fileName);
     $pdo->bindParam(":newFileName", $newFileName);
+    $pdo->execute();
+    if ($pdo->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updateImageMeta(PDO $conn, int $imageId, string $newTitle, string $newDescription): bool
+{
+    $pdo = $conn->prepare("UPDATE imatge SET titol = :imageTitle , descripcio = :imageDescription WHERE imatge.id = :imageId");
+    $pdo->bindParam(":imageTitle", $newTitle);
+    $pdo->bindParam(":imageDescription", $newDescription);
+    $pdo->bindParam(":imageId", $imageId);
     $pdo->execute();
     if ($pdo->rowCount() > 0) {
         return true;
