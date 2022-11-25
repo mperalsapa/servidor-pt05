@@ -17,10 +17,13 @@ function printImages(PDOStatement $images, bool $selecting): void
             $userId = getUserIDSession();
         }
 
-        if (isset($userId) && $row["autor"] == $userId && $row["utilitzada"] < 1) {
-            $display = "";
-        } else {
-            $display = "d-none";
+        $editing = "d-none";
+        $display = "d-none";
+        if (isset($userId) && $row["autor"] == $userId) {
+            $editing = "";
+            if ($row["utilitzada"] < 1) {
+                $display = "";
+            }
         }
 
 
@@ -40,6 +43,7 @@ function printImages(PDOStatement $images, bool $selecting): void
                                 <p class=\"card-text\">$userName</p>
                                 <div class=\"d-flex justify-content-between\">
                                     <a class=\"$selecting btn btn-sm btn-primary\" href=gallery?selectImage=$imageId>Seleccionar</a>
+                                    <a class=\"$editing btn btn-sm btn-primary\" href=add-image?id=$imageId>Editar Informacio</a>
                                     <!-- Button trigger modal -->
                                     <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">
                                         <i class=\"bi bi-trash\"></i>
