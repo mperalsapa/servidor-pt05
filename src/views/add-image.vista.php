@@ -15,7 +15,7 @@
     ?>
     <div class="d-flex align-items-center justify-content-center">
         <div class="bg-white rounded col-10 col-md-8 col-lg-6 col-xxl-4 mb-4">
-            <form class="align-middle m-4" action="add-image" method="POST" enctype="multipart/form-data">
+            <form class="align-middle m-4" action="add-image<?php echo $viewData["adding"] ? "" : "?id=" . $viewData["imageId"] ?>" method="POST" enctype="multipart/form-data">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="gallery">Galeria</a></li>
@@ -26,7 +26,7 @@
                 <div class="d-flex flex-column">
                     <div class="mb-3 col-12">
                         <label class="col-12">Titol de la imatge
-                            <input type="text" class="form-control col-12" id="imageTitle" name="imageTitle" placeholder="Títol de la imatge">
+                            <input type="text" class="form-control col-12" id="imageTitle" name="imageTitle" placeholder="Títol de la imatge" value="<?= $viewData["imageTitle"] ?>">
                         </label>
                     </div>
                     <div class="mb-3 col-12">

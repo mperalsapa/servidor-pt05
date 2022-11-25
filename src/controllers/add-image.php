@@ -11,9 +11,23 @@ include_once("src/internal/db/mysql.php");
 include_once("src/internal/viewFunctions/form-error.php");
 include_once("src/internal/viewFunctions/browser.php");
 
+function setMetaView(array $meta): mixed
+{
+    $viewData["pageTitle"] = "Modificar Informacio";
+    $viewData["imageTitle"] = $meta["titol"];
+    $viewData["imageDescription"] = $meta["descripcio"];
+    $viewData["adding"] = false;
+    $viewData["imageId"] = $meta["id"];
+    return $viewData;
+}
+
+if (!checkLogin()) {
+    redirectClient("/");
+}
+
 $viewData = array(
     "pageTitle" => "Afegir Imatge",
-    "imagetitle" => "",
+    "imageTitle" => "",
     "imageDescription" => "",
     "adding" => true
 );
@@ -21,13 +35,46 @@ $viewData = array(
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include("env.php");
 
+
+
+    if (isset($_GET["id"])) {
+        $imageId = intval($_GET["id"]);
+        $pdo = getMysqlPDO();
+        $meta = getImageMeta($pdo, $imageId);
+        if (!isset($meta["id"]) || $meta["autor"] != getUserIDSession()) {
+            redirectClient("gallery");
+        }
+
+        $viewData = setMetaView($meta);
+        // $viewData["pageTitle"] = "Modificar Informacio";
+        // $viewData["imageTitle"] = $meta["titol"];
+        // $viewData["imageDescription"] = $meta["descripcio"];
+        // $viewData["adding"] = false;
+        // $viewData["imageId"] = $meta["id"];
+
+        if (empty($_POST["imageTitle"])) {
+
+            returnAlert("No has introduit un titol.", "danger", "src/views/add-image.vista.php", $viewData);
+        }
+        $imageTitle = $_POST["imageTitle"];
+        // descripcio de la imatge (opcional)
+        $imageDescription = $_POST["imageDescription"];
+
+        if (updateImageMeta($pdo, $meta["id"], $imageTitle, $imageDescription)) {
+            $viewData = setMetaView(getImageMeta($pdo, $imageId));
+            returnAlert("S'ha canviat la informacio correctament.", "success", "src/views/add-image.vista.php", $viewData);
+        } else {
+            returnAlert("No s'ha pogut canviar la informacio correctament.", "danger", "src/views/add-image.vista.php", $viewData);
+        }
+        die();
+    }
+
     if (empty($_POST["imageTitle"])) {
         returnAlert("No has introduit un titol.", "danger", "src/views/add-image.vista.php", $viewData);
     }
     $imageTitle = $_POST["imageTitle"];
     // descripcio de la imatge (opcional)
     $imageDescription = $_POST["imageDescription"];
-
 
     // comprovem si el post rebut es des d'un formulari amb un submit
     if (isset($_POST["submit"]) && $_FILES["imageFile"]["size"] != 0 && $_FILES["imageFile"]["error"] == 0) {
@@ -79,11 +126,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     if (isset($_GET["id"])) {
         $imageId = intval($_GET["id"]);
+        $pdo = getMysqlPDO();
         $meta = getImageMeta($pdo, $imageId);
+
+        if (!isset($meta["id"]) || $meta["autor"] != getUserIDSession()) {
+            redirectClient("gallery");
+        }
+
         $viewData["pageTitle"] = "Modificar Informacio";
         $viewData["imageTitle"] = $meta["titol"];
         $viewData["imageDescription"] = $meta["descripcio"];
         $viewData["adding"] = false;
+        $viewData["imageId"] = $meta["id"];
     }
 
     include_once("src/views/add-image.vista.php");
