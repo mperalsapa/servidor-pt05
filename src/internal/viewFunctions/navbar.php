@@ -30,7 +30,7 @@
 
                         $pdo = getMysqlPDO();
                         $pagePath = getPathOverBase(false);
-                        if ($pagePath == "gallery" || $pagePath == "add-image") {
+                        if ($pagePath == "gallery" || $pagePath == "add-image" || $pagePath == "rename-image-filename") {
                             $badgeText = "Afegir Image";
                             $badgeUrl = "add-image";
                             $badgeCount = getImageCountByUserID($pdo, $_SESSION["id"]);

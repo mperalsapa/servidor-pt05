@@ -40,6 +40,7 @@ $mux["/contact"] = "src/controllers/contact.php";
 $mux["/gallery"] = "src/controllers/gallery.php";
 $mux["/add-image"] = "src/controllers/add-image.php";
 $mux["/delete-image"] = "src/controllers/delete-image.php";
+$mux["/rename-image-filename"] = "src/controllers/rename-image-filename.php";
 
 // rutes que tenen a veure amb l'usuari
 $mux["/change-email"] = "src/controllers/change-profile.php";

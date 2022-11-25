@@ -454,3 +454,24 @@ function getImageMeta(PDO $conn, int $imageId): mixed
         return null;
     }
 }
+
+function getUserImageFiles(PDO $conn, int $userId): PDOStatement
+{
+    $pdo = $conn->prepare("SELECT fitxer FROM imatge WHERE autor = :userId");
+    $pdo->bindParam(":userId", $userId);
+    $pdo->execute();
+    return $pdo;
+}
+
+function renameImageFile(PDO $conn, string $fileName, string $newFileName): bool
+{
+    $pdo = $conn->prepare("UPDATE imatge SET fitxer = :newFileName WHERE imatge.fitxer = :fileName");
+    $pdo->bindParam(":fileName", $fileName);
+    $pdo->bindParam(":newFileName", $newFileName);
+    $pdo->execute();
+    if ($pdo->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}

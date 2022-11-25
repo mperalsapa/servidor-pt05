@@ -35,6 +35,9 @@
                 echo "<a class=\"btn btn-primary $allActive\" href=\"gallery?p=$page&view=all\">Totes</a>";
                 echo "<a class=\"btn btn-primary $meActive\" href=\"gallery?p=$page&view=mine\">Meves</a>";
                 echo "</div>";
+                if (getImageCountByUserID($pdo, getUserIDSession()) > 0) {
+                    echo "<a class=\"btn btn-primary\" href=\"rename-image-filename\">Modificar en massa</a>";
+                }
             }
         }
 
