@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2022 a las 19:37:26
+-- Tiempo de generación: 25-11-2022 a las 19:44:09
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -22,12 +22,14 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `pt05_marc_peral` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `pt05_marc_peral`;
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `article`
 --
 
+DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `titol` varchar(255) DEFAULT NULL,
@@ -37,6 +39,11 @@ CREATE TABLE `article` (
   `imatge` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncar tablas antes de insertar `article`
+--
+
+TRUNCATE TABLE `article`;
 --
 -- Volcado de datos para la tabla `article`
 --
@@ -52,6 +59,7 @@ INSERT INTO `article` (`id`, `titol`, `article`, `autor`, `data`, `imatge`) VALU
 -- Estructura de tabla para la tabla `imatge`
 --
 
+DROP TABLE IF EXISTS `imatge`;
 CREATE TABLE `imatge` (
   `id` int(11) NOT NULL,
   `autor` int(11) NOT NULL,
@@ -60,6 +68,11 @@ CREATE TABLE `imatge` (
   `fitxer` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncar tablas antes de insertar `imatge`
+--
+
+TRUNCATE TABLE `imatge`;
 --
 -- Volcado de datos para la tabla `imatge`
 --
@@ -86,6 +99,7 @@ INSERT INTO `imatge` (`id`, `autor`, `titol`, `descripcio`, `fitxer`) VALUES
 -- Estructura de tabla para la tabla `usuari`
 --
 
+DROP TABLE IF EXISTS `usuari`;
 CREATE TABLE `usuari` (
   `id` int(11) NOT NULL,
   `nom` varchar(20) NOT NULL,
@@ -97,6 +111,11 @@ CREATE TABLE `usuari` (
   `ultima_solicitud_token` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncar tablas antes de insertar `usuari`
+--
+
+TRUNCATE TABLE `usuari`;
 --
 -- Volcado de datos para la tabla `usuari`
 --
