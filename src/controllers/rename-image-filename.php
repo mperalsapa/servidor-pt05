@@ -56,12 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     rename($uploadsFolder . $newFileName, $uploadsFolder . $file);
                     returnAlert("S'ha produit un error a l'hora de canviar el nom del fitxer.", "danger", "src/views/rename-image-filename.vista.php", $viewData);
                 }
-                $viewData["files"] = getUserImageFiles($pdo, $userId);
-                returnAlert("S'ha canviat el nom del fitxer correctament.", "success", "src/views/rename-image-filename.vista.php", $viewData);
+                continue;
             }
         }
         returnAlert("El fitxer que es vol modificar no existeix. Contacta amb l'administrador", "danger", "src/views/rename-image-filename.vista.php", $viewData);
     }
     $viewData["files"] = getUserImageFiles($pdo, $userId);
-    include_once("src/views/rename-image-filename.vista.php");
+    returnAlert("S'ha canviat el nom del fitxer correctament.", "success", "src/views/rename-image-filename.vista.php", $viewData);
 }
