@@ -6,6 +6,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_route"
         },                {
+            "fqsen": "\\setMetaView\u0028\u0029",
+            "name": "setMetaView",
+            "summary": "",
+            "url": "namespaces/default.html#function_setMetaView"
+        },                {
             "fqsen": "\\getArticleData\u0028\u0029",
             "name": "getArticleData",
             "summary": "",
@@ -141,6 +146,76 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_removeUserAccount"
         },                {
+            "fqsen": "\\addImage\u0028\u0029",
+            "name": "addImage",
+            "summary": "",
+            "url": "namespaces/default.html#function_addImage"
+        },                {
+            "fqsen": "\\updateImageMetaData\u0028\u0029",
+            "name": "updateImageMetaData",
+            "summary": "",
+            "url": "namespaces/default.html#function_updateImageMetaData"
+        },                {
+            "fqsen": "\\getImageCount\u0028\u0029",
+            "name": "getImageCount",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImageCount"
+        },                {
+            "fqsen": "\\getImageCountByUserID\u0028\u0029",
+            "name": "getImageCountByUserID",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImageCountByUserID"
+        },                {
+            "fqsen": "\\getImagePage\u0028\u0029",
+            "name": "getImagePage",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImagePage"
+        },                {
+            "fqsen": "\\getImagePageByUserID\u0028\u0029",
+            "name": "getImagePageByUserID",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImagePageByUserID"
+        },                {
+            "fqsen": "\\getImageAuthor\u0028\u0029",
+            "name": "getImageAuthor",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImageAuthor"
+        },                {
+            "fqsen": "\\getImageUsage\u0028\u0029",
+            "name": "getImageUsage",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImageUsage"
+        },                {
+            "fqsen": "\\deleteImage\u0028\u0029",
+            "name": "deleteImage",
+            "summary": "",
+            "url": "namespaces/default.html#function_deleteImage"
+        },                {
+            "fqsen": "\\getImageName\u0028\u0029",
+            "name": "getImageName",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImageName"
+        },                {
+            "fqsen": "\\getImageMeta\u0028\u0029",
+            "name": "getImageMeta",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImageMeta"
+        },                {
+            "fqsen": "\\getUserImageFiles\u0028\u0029",
+            "name": "getUserImageFiles",
+            "summary": "",
+            "url": "namespaces/default.html#function_getUserImageFiles"
+        },                {
+            "fqsen": "\\renameImageFile\u0028\u0029",
+            "name": "renameImageFile",
+            "summary": "",
+            "url": "namespaces/default.html#function_renameImageFile"
+        },                {
+            "fqsen": "\\updateImageMeta\u0028\u0029",
+            "name": "updateImageMeta",
+            "summary": "",
+            "url": "namespaces/default.html#function_updateImageMeta"
+        },                {
             "fqsen": "\\checkLogin\u0028\u0029",
             "name": "checkLogin",
             "summary": "",
@@ -181,6 +256,26 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_setUserLoggedinData"
         },                {
+            "fqsen": "\\setLastArticleWrite\u0028\u0029",
+            "name": "setLastArticleWrite",
+            "summary": "",
+            "url": "namespaces/default.html#function_setLastArticleWrite"
+        },                {
+            "fqsen": "\\getLastArticleWrite\u0028\u0029",
+            "name": "getLastArticleWrite",
+            "summary": "",
+            "url": "namespaces/default.html#function_getLastArticleWrite"
+        },                {
+            "fqsen": "\\setSelectedImage\u0028\u0029",
+            "name": "setSelectedImage",
+            "summary": "",
+            "url": "namespaces/default.html#function_setSelectedImage"
+        },                {
+            "fqsen": "\\getSelectedImage\u0028\u0029",
+            "name": "getSelectedImage",
+            "summary": "",
+            "url": "namespaces/default.html#function_getSelectedImage"
+        },                {
             "fqsen": "\\printArticlesbyUserId\u0028\u0029",
             "name": "printArticlesbyUserId",
             "summary": "",
@@ -220,6 +315,16 @@ Search.appendIndex(
             "name": "checkCaptcha",
             "summary": "",
             "url": "namespaces/default.html#function_checkCaptcha"
+        },                {
+            "fqsen": "\\printImages\u0028\u0029",
+            "name": "printImages",
+            "summary": "",
+            "url": "namespaces/default.html#function_printImages"
+        },                {
+            "fqsen": "\\getImageUrl\u0028\u0029",
+            "name": "getImageUrl",
+            "summary": "",
+            "url": "namespaces/default.html#function_getImageUrl"
         },                {
             "fqsen": "\\getCurrentGitCommit\u0028\u0029",
             "name": "getCurrentGitCommit",
