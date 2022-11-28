@@ -18,11 +18,13 @@ function printImages(PDOStatement $images, bool $selecting): void
         }
 
         $editing = "d-none";
-        $display = "d-none";
+        $canDelete = "d-none";
         if (isset($userId) && $row["autor"] == $userId) {
-            $editing = "";
+            if ($selecting != "") {
+                $editing = "";
+            }
             if ($row["utilitzada"] < 1) {
-                $display = "";
+                $canDelete = "";
             }
         }
 
@@ -45,7 +47,7 @@ function printImages(PDOStatement $images, bool $selecting): void
                                     <a class=\"$selecting btn btn-sm btn-primary\" href=gallery?selectImage=$imageId>Seleccionar</a>
                                     <a class=\"$editing btn btn-sm btn-primary\" href=add-image?id=$imageId>Editar Informacio</a>
                                     <!-- Button trigger modal -->
-                                    <button type=\"button\" class=\"btn btn-danger align-self-end $display\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">
+                                    <button type=\"button\" class=\"btn btn-danger align-self-end $canDelete\" data-bs-toggle=\"modal\" data-bs-target=\"#imageModal$imageId\">
                                         <i class=\"bi bi-trash\"></i>
                                     </button>
                                 </div>
