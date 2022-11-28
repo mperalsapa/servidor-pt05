@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     // iniciem la connexio amb la base de dades
     $pdo = getMysqlPDO();
     // comprovem si NO es canvi d'email
-    if ($url != "/change-email") {
+    if ($url == "/change-password") {
         // en cas de no ser canvi d'email, iniciem les variables de la plantilla amb la configuracio de contrasenya
         $viewData["resetPassword"] = false;
         $viewData["success"] = false;
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // iniciem la connexio amb la base de dades
     $pdo = getMysqlPDO();
     // comprovem si NO es canvi d'email
-    if ($url != "/change-email") {
+    if ($url == "/change-password") {
         // en cas de no ser canvi d'email, iniciem les variables de la plantilla amb la configuracio de contrasenya
         $viewData["resetPassword"] = false;
         $viewData["success"] = false;
@@ -120,6 +120,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($password != $password2) {
             returnAlert("La verificacio de la contrasenya i la contrasenya no coincideixen. Prova un altre cop", "danger", "src/views/reset-password.vista.php", $viewData);
+        }
+
+        // comprovem si la contrasenya te:
+        // 8 caracters de llargada
+        // 1 numero
+        // 1 lletra minuscula
+        // 1 lletra majuscula
+        // un caracter especial
+        if (!preg_match_all('$\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$', $password)) {
+            returnAlert("La contrasenya ha de ser d'una llargada de 8 caracters i ha de contenir una lletra minuscula, una majuscula, un numero i un caracter especial.", "danger", "src/views/reset-password.vista.php", $viewData);
         }
 
         // si la contrasenya i la verificacio son correctes, canviem la contrasenya de l'usuari

@@ -70,6 +70,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         returnAlert($formResult, "danger", "src/views/register.vista.php", $viewData);
     }
 
+    // comprovem si la contrasenya te:
+    // 8 caracters de llargada
+    // 1 numero
+    // 1 lletra minuscula
+    // 1 lletra majuscula
+    // un caracter especial
+    if (!preg_match_all('$\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$', $password)) {
+        returnAlert("La contrasenya ha de ser d'una llargada de 8 caracters i ha de contenir una lletra minuscula, una majuscula, un numero i un caracter especial.", "danger", "src/views/register.vista.php", $viewData);
+    }
+
+
 
     // si tots els camps son correctes, iniciem una connexio amb la base de dades
     $pdo = getMysqlPDO();
