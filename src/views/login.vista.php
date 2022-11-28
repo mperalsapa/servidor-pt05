@@ -69,7 +69,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
                         <button class="accordion-button collapsed p-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                            Social - <i class="ms-2 bi bi-google"></i> <i class="ms-1 bi bi-github"></i> <i class="ms-1 bi bi-twitter"></i>
+                            Social - <i class="ms-2 bi bi-google"></i> <i class="ms-1 bi bi-github"></i>
                         </button>
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -82,10 +82,6 @@
                                 <a class="d-flex justify-content-center align-items-center border btn btn-dark py-3 " href="login?socialLogin=github">
                                     <i class="bi bi-github"></i>
                                     <p class="m-0 ms-3">Github</p>
-                                </a>
-                                <a class="d-flex justify-content-center align-items-center border btn btn-info py-3 " href="login?socialLogin=twitter">
-                                    <i class="bi bi-twitter"></i>
-                                    <p class="m-0 ms-3">Twitter</p>
                                 </a>
                             </div>
                         </div>
