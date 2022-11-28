@@ -28,12 +28,10 @@
                 <div class="form-group">
                     <label for="replace">Cadena de text a reemplaçar</label>
                     <input type="text" class="form-control" name="replace" placeholder="Cadena de text a reemplaçar" id="replace" required value="<?= $viewData["replace"] ?>">
-                    <div class="invalid-feedback">Introdueix un correu electronic valid</div>
                 </div>
                 <div class="form-group mt-4">
                     <label for="replace-for">Nova cadena de text</label>
                     <input type="text" class="form-control" name="replace-for" placeholder="Nova cadena de text" id="replace-for" required value="<?= $viewData["replace-for"] ?>">
-                    <div class="invalid-feedback">Introdueix una contrasenya</div>
                 </div>
                 <?php
 
@@ -41,7 +39,7 @@
                     echo "<div class=\"mt-3 mb-0 d-flex justify-content align-items-center alert alert-$alertType alert-dismissible\" role=\"alert\"><span class=\"me-3\">$alertIcon</span> $alertMessage <button type=\"button\" class=\"btn-close\" aria-label=\"Close\" data-bs-dismiss=\"alert\" ></button></div>";
                 }
                 ?>
-                <button type="submit" class="btn btn-primary col-12 mt-3"><i class="bi bi-send"></i> Iniciar Sessió</button>
+                <button type="submit" class="btn btn-primary col-12 mt-3"><i class="bi bi-pencil"></i> Renombrar</button>
             </form>
             <div class="col d-flex flex-column " style="max-height: 300px;">
                 Fitxers en propietat
