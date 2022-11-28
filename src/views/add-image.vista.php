@@ -52,7 +52,7 @@
                         echo "<div class=\"mb-3 mb-0 d-flex justify-content align-items-center alert alert-$alertType alert-dismissible\" role=\"alert\"><span class=\"me-3\">$alertIcon</span> $alertMessage <button type=\"button\" class=\"btn-close\" aria-label=\"Close\" data-bs-dismiss=\"alert\" ></button></div>";
                     }
                     ?>
-                    <button type="submit" name="submit" class="btn btn-primary mt-auto">Guardar</button>
+                    <button type="submit" name="submit" class="btn btn-primary mt-auto"><i class="bi bi-<?= $viewData["sendIcon"] ?>"></i> Guardar</button>
                 </div>
             </form>
 

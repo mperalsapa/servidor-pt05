@@ -18,6 +18,7 @@ function setMetaView(array $meta): mixed
     $viewData["imageDescription"] = $meta["descripcio"];
     $viewData["adding"] = false;
     $viewData["imageId"] = $meta["id"];
+    $viewData["sendIcon"] = "pencil";
     return $viewData;
 }
 
@@ -29,7 +30,8 @@ $viewData = array(
     "pageTitle" => "Afegir Imatge",
     "imageTitle" => "",
     "imageDescription" => "",
-    "adding" => true
+    "adding" => true,
+    "sendIcon" => "cloud-arrow-up"
 );
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,11 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $viewData = setMetaView($meta);
-        // $viewData["pageTitle"] = "Modificar Informacio";
-        // $viewData["imageTitle"] = $meta["titol"];
-        // $viewData["imageDescription"] = $meta["descripcio"];
-        // $viewData["adding"] = false;
-        // $viewData["imageId"] = $meta["id"];
 
         if (empty($_POST["imageTitle"])) {
 
@@ -133,11 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             redirectClient("gallery");
         }
 
-        $viewData["pageTitle"] = "Modificar Informacio";
-        $viewData["imageTitle"] = $meta["titol"];
-        $viewData["imageDescription"] = $meta["descripcio"];
-        $viewData["adding"] = false;
-        $viewData["imageId"] = $meta["id"];
+        $viewData = setMetaView($meta);
     }
 
     include_once("src/views/add-image.vista.php");
